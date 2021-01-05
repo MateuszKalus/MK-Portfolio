@@ -1,0 +1,184 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0px;
+  padding: 0px;
+}
+
+main {
+  position: relative;
+}
+
+.pagelink {
+  position: absolute;
+  top: 0;
+}
+
+section.main-page {
+  overflow: hidden;
+}
+
+//section {
+//  & * {
+//    color: inherit;
+//  }
+//}
+
+.moving-background {
+  z-index: 1;
+
+  pointer-events: none;
+  display: block;
+  position: fixed;
+  right: 0px;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0) 40%, rgba(40, 70, 96, 0.7) 90%);
+
+}
+
+$moon-size: 20vw;
+$sun-size: 30vw;
+
+
+.night {
+  background-color: #040e14;
+  transition: 1s;
+
+  color: red;
+
+  & #sun-img {
+    right: 50%;
+    top: - $sun-size/2;
+  }
+}
+
+
+
+
+#moon-img {
+  z-index: 2;
+  position: absolute;
+
+  width: $moon-size;
+  height: $moon-size;
+
+  right: 250px;
+  top: 250px;
+
+  transform: translateX(50%) translateY(-50%);
+
+
+  transition: 1s;
+}
+
+
+#sun-img {
+  z-index: 2;
+  position: absolute;
+
+  width: $sun-size;
+  height: $sun-size;
+
+  right: 250px;
+  top: 250px;
+
+  transform: translateX(50%) translateY(-50%);
+
+  transition: 1s;
+}
+
+.day {
+  background-color: #405696;
+  transition: 1s;
+
+  & #moon-img {
+    right: -$moon-size;
+    top: 50%;
+
+  }
+}
+
+.theme-slicer {
+  position: absolute;
+  right: 100px;
+  bottom: 50px;
+
+  cursor: pointer;
+
+  $this-width: 60px;
+  $this-height: 25px;
+
+  & span {
+    position: relative;
+
+    display: block;
+
+    width: $this-width;
+    height: $this-height;
+    background-color: aliceblue;
+    border-radius: $this-width/2;
+
+    &:before {
+      content: '';
+
+      $slicerDimmension: $this-height/5*8;
+
+      width: $slicerDimmension;
+      height: $slicerDimmension;
+
+      -webkit-box-shadow: 1px 15px 19px -6px #000000;
+      box-shadow: 1px 15px 19px -6px #000000;
+
+      background-color: red;
+      border-radius: 50%;
+
+      position: absolute;
+
+      left: -($slicerDimmension/2 - $this-height/2);
+      top: -($slicerDimmension/2 - $this-height/2);
+
+      transition: 0.3s;
+
+    }
+  }
+
+  & input {
+    display: none;
+  }
+
+  & input:checked {
+    + span:before {
+      transform: translateX($this-width - $this-height);
+    }
+  }
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.stars-background {
+  transition-duration: 0.7s;
+  transition-delay: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: opacity;
+  //pointer-events: none;
+
+
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hide {
+  opacity: 0;
+}
