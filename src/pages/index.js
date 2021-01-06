@@ -1,82 +1,91 @@
 import './styles.css'
+import './sky.css'
 import {Link} from 'gatsby'
 import Moon from '../images/moon.png'
 import Sun from '../images/sun.png'
 
-import setBackground from "./background";
 import React, {useState, useEffect} from "react";
 
 
 const IndexPage = () => {
 
     const [isNight, setIsNight] = useState(true);
-    const [isBackgroundSet, setIsBackgroundSet] = useState(false);
 
     const getGradient = (deg, opacity) => {
-        if (isNight) return `linear-gradient(${deg}deg, rgba(0,0,0,0) 25%, rgba(40,70,96,${opacity}) 90%)`;
-        else return `linear-gradient(${deg}deg, rgba(0,0,0,0) 25%, rgba(135,183,210,${opacity}) 90%)`;
+        if (isNight) return `linear-gradient(${deg}deg, rgba(0,0,0,0) 45%, rgba(0,69,97,${opacity}) 95%)`;
+        else return `linear-gradient(${deg}deg, rgba(0,0,0,0) 45%, rgba(109,185,213,${opacity}) 95%)`;
     };
 
     useEffect(() => {
-        if (!isBackgroundSet) {
-            setBackground();
-            setIsBackgroundSet(true);
-        }
-
 
         window.addEventListener('scroll', handleScroll);
 
+        const skyBackground = document.querySelector('.sky-container')
         const sections = document.querySelectorAll('section');
-        const canvas = document.querySelector('canvas');
 
 
         if (isNight) {
-            canvas.style.opacity = 1;
+            skyBackground.classList.remove('hide');
             sections.forEach((section) => {
                 section.classList.add('night');
                 section.classList.remove('day');
             })
         } else {
-            canvas.style.opacity = 0;
-
+            skyBackground.classList.add('hide');
             sections.forEach((section) => {
                 section.classList.remove('night');
                 section.classList.add('day');
             })
         }
 
-        handleScroll(); //for updating gradient
+        handleScroll(2, true); //for updating gradient
+        setTimeout( () => {
+            handleScroll(); //for updating gradient
 
+        }, 500)
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
     }, [isNight]);
 
 
-    const handleScroll = () => {
+    const handleScroll = (e, firstTime= false) => {
+
+        console.log(firstTime)
+
 
         let background = document.querySelector('.moving-background');
-        let moon = document.querySelector('#moon-img')
+        let orb;
 
-        let moonRect = moon.getBoundingClientRect();
+        if (isNight) orb=document.querySelector('#moon-img');
+        else orb=document.querySelector('#sun-img');
 
-        let howLowUnderTopBorder = moonRect.y + moon.offsetHeight / 2;
+
+        let orbRect = orb.getBoundingClientRect();
+
+        let howLowUnderTopBorder = orbRect.y + orb.offsetHeight / 2;
 
         if (howLowUnderTopBorder < 0) {
-            console.log(howLowUnderTopBorder);
-            const initialAngle = 45;
-            const initialOpacity = 0.7;
+            const initialAngle = 90;
+            const initialOpacity = 0.6;
 
             let deg = initialAngle - Math.floor(howLowUnderTopBorder / 5 * (-1));
             let opacity = initialOpacity - Math.floor(howLowUnderTopBorder / 5 * (-1)) / 100;
 
             if (opacity < 0) opacity = 0;
+
             if (deg < 0) deg = 0;
 
+            if (firstTime) {
+                deg = initialAngle;
+                opacity = initialOpacity;
+            }
+
             background.style.backgroundImage = getGradient(deg, opacity);
-            // background.style.top = '-200px';
         } else {
-            let deg = 45;
-            let opacity = 0.7;
+            let deg = 90;
+            let opacity = 0.6;
             background.style.backgroundImage = getGradient(deg, opacity);
 
         }
@@ -84,7 +93,6 @@ const IndexPage = () => {
     };
 
     const handleThemeChange = (e) => {
-        console.log(e.target.checked);
         setIsNight(e.target.checked);
 
     }
@@ -92,25 +100,43 @@ const IndexPage = () => {
     return (
         <main>
             <div className={'moving-background'}></div>
-
             <section className={'main-page night'} id={'main-page'}>
-                <canvas className={'stars-background'}/>
-                <img id={'moon-img'} src={Moon}/>
-                <img id={'sun-img'} src={Sun}/>
+                <div className={'content'}>
+                    <h1>Hi. I'm Mateusz.</h1>
+                    <div className={'text-content'}>
+                        <p>
+                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
+                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
+                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
+                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
+                        </p>
+                    </div>
+                </div>
+
+                <div className={'sky-container'}>
+                    <sky>
+                        <div className={'text'}></div>
+                        <div className={'stars'}></div>
+                        <div className={'stars1'}></div>
+                        <div className={'stars2'}></div>
+                        <div className={'shooting-stars'}></div>
+                    </sky>
+                </div>
+
+                <img id={'moon-img'} className={'orb'} src={Moon}/>
+                <img id={'sun-img'} className={'orb'} src={Sun}/>
 
                 <label className={'theme-slicer'}>
                     <input defaultChecked={true} type="checkbox" onChange={handleThemeChange}/>
                     <span></span>
                 </label>
-                <h1>WITAJ ŚWIECIE</h1>
-                <a href={'#main-page'} style={{color: "white"}}>{isNight.toString()}</a>
 
             </section>
 
 
             <section className={'night'}>
 
-                <a href={'#main-page'}>IsNight: {(isNight.toString())}</a>
+                <a href={'#main-page'}>Link</a>
 
             </section>
         </main>
