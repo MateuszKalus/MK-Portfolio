@@ -40,10 +40,13 @@ section {
 }
 
 .sky-container {
-  position: absolute;
+  z-index: 1;
+  position: fixed;
   top:0;
   left:0;
 }
+
+a { z-index: 1}
 
 p {
   margin: 30px 0px;
@@ -87,15 +90,6 @@ section.main-page {
   background: linear-gradient(45deg, rgba(0, 0, 0, 0) 40%, rgba(40, 70, 96, 0.7) 90%);
 }
 
-.stars-background {
-  pointer-events: none;
-
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
 
 $moon-size: 24vw;
 $sun-size: 40vw;
@@ -244,7 +238,7 @@ $sun-size: 40vw;
 }
 
 .hide {
-  opacity: 0;
+  visibility: hidden;
 }
 
 #last-sentence {
@@ -252,4 +246,11 @@ $sun-size: 40vw;
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 5px;
+}
+
+.arrow-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("../images/down-arrow.svg");
 }

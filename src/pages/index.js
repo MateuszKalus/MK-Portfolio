@@ -56,10 +56,10 @@ const IndexPage = () => {
 
 
         let background = document.querySelector('.moving-background');
-        let orb;
+        let orb = document.querySelector('.opacity-marker');
 
-        if (isNight) orb = document.querySelector('#moon-img');
-        else orb = document.querySelector('#sun-img');
+        // if (isNight) orb = document.querySelector('#moon-img');
+        // else orb = document.querySelector('#sun-img');
 
 
         let orbRect = orb.getBoundingClientRect();
@@ -69,18 +69,23 @@ const IndexPage = () => {
         if (howLowUnderTopBorder < 0) {
             const initialAngle = 90;
             const initialOpacity = 0.6;
+            const initialOpacityForStars = 1;
 
             let deg = initialAngle - Math.floor(howLowUnderTopBorder / 5 * (-1));
             let opacity = initialOpacity - Math.floor(howLowUnderTopBorder / 5 * (-1)) / 100;
+            let opacityForStars = initialOpacityForStars - Math.floor(howLowUnderTopBorder / 5 * (-1)) / 100;
 
             if (opacity < 0) opacity = 0;
+            if (opacityForStars < 0) opacityForStars = 0;
 
             if (deg < 0) deg = 0;
 
-            if (firstTime) {
-                deg = initialAngle;
-                opacity = initialOpacity;
-            }
+            document.querySelector('.sky-container').style.opacity = opacityForStars;
+
+            // if (firstTime) {
+            //     deg = initialAngle;
+            //     opacity = initialOpacity;
+            // }
 
             background.style.backgroundImage = getGradient(deg, opacity);
         } else {
@@ -102,7 +107,7 @@ const IndexPage = () => {
             <div className={'moving-background'}></div>
             <section className={'main-page night'} id={'main-page'}>
                 <div className={'content'}>
-                    <h1>Hi.</h1>
+                    <h1 className={'opacity-marker'}>Hi.</h1>
                     <span>My name is Mateusz.</span>
                     <div className={'text-content'}>
                         <p>
@@ -118,12 +123,12 @@ const IndexPage = () => {
 
                         </p>
                         <p>
-                            I believe that success in my field lies in combining good quality code and adopting a
+                            I believe that success in my profession lies in combining good quality code and adopting a
                             strategy:
                             from general to specific.
                         </p>
                         <p id={'last-sentence'}>
-                            And constant learning of course.
+                            And constant learning of course 😃
                         </p>
 
                     </div>
@@ -146,6 +151,8 @@ const IndexPage = () => {
                     <input defaultChecked={true} type="checkbox" onChange={handleThemeChange}/>
                     <span></span>
                 </label>
+
+                <div className={'arrow-svg'}></div>
 
             </section>
 
