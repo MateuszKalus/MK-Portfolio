@@ -39,7 +39,7 @@ const IndexPage = () => {
         }
 
         handleScroll(2, true); //for updating gradient
-        setTimeout( () => {
+        setTimeout(() => {
             handleScroll(); //for updating gradient
 
         }, 500)
@@ -50,7 +50,7 @@ const IndexPage = () => {
     }, [isNight]);
 
 
-    const handleScroll = (e, firstTime= false) => {
+    const handleScroll = (e, firstTime = false) => {
 
         console.log(firstTime)
 
@@ -58,8 +58,8 @@ const IndexPage = () => {
         let background = document.querySelector('.moving-background');
         let orb;
 
-        if (isNight) orb=document.querySelector('#moon-img');
-        else orb=document.querySelector('#sun-img');
+        if (isNight) orb = document.querySelector('#moon-img');
+        else orb = document.querySelector('#sun-img');
 
 
         let orbRect = orb.getBoundingClientRect();
@@ -102,14 +102,30 @@ const IndexPage = () => {
             <div className={'moving-background'}></div>
             <section className={'main-page night'} id={'main-page'}>
                 <div className={'content'}>
-                    <h1>Hi. I'm Mateusz.</h1>
+                    <h1>Hi.</h1>
+                    <span>My name is Mateusz.</span>
                     <div className={'text-content'}>
                         <p>
-                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
-                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
-                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
-                            I'm Front-end Developer and Electronic Engineer, felt in love in design.
+                            I am <strong className={'in-text-strong'}>Front-End Developer</strong> and Electronics Engineer. I am also familiar with the <u className={'in-text-strong'}>Back-End</u> and <u className={'in-text-strong'}>Design</u> technologies that I use as a tool in my work.
                         </p>
+                        <p className={'important-text'}>
+                            For me, programming is a well of endless possibilities, and each new line of code is a
+                            miracle of creation.
+                        </p>
+                        <p>
+                            However, at the end of the day, the most important thing is that the project meets the
+                            requirements. In my projects, I pay attention to optimization, reliability and stability.
+
+                        </p>
+                        <p>
+                            I believe that success in my field lies in combining good quality code and adopting a
+                            strategy:
+                            from general to specific.
+                        </p>
+                        <p id={'last-sentence'}>
+                            And constant learning of course.
+                        </p>
+
                     </div>
                 </div>
 
