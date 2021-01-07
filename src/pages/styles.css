@@ -69,9 +69,9 @@ h1 + span {
 }
 
 section.main-page {
-  overflow: hidden;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
 }
 
 .moving-background {
@@ -126,6 +126,9 @@ section.main-page {
 .day {
   background-color: #315599;
 }
+.day .clouds {
+  opacity: 1;
+}
 .day #moon-img {
   right: 50%;
   top: -12vw;
@@ -150,14 +153,14 @@ section.main-page {
   padding-top: 0px;
 }
 
-.theme-slicer {
+.theme-slicer, .language-slicer {
   z-index: 1;
   position: absolute;
   right: 50px;
   bottom: 40px;
   cursor: pointer;
 }
-.theme-slicer span {
+.theme-slicer span, .language-slicer span {
   position: relative;
   display: block;
   width: 55px;
@@ -165,7 +168,7 @@ section.main-page {
   background-color: aliceblue;
   border-radius: 27.5px;
 }
-.theme-slicer span:before {
+.theme-slicer span:before, .language-slicer span:before {
   content: "";
   position: absolute;
   left: -7.5px;
@@ -181,12 +184,26 @@ section.main-page {
   border-radius: 50%;
   transition: 0.3s;
 }
-.theme-slicer input {
+.theme-slicer input, .language-slicer input {
   display: none;
 }
-.theme-slicer input:checked + span:before {
+.theme-slicer input:checked + span:before, .language-slicer input:checked + span:before {
   background-image: url("../images/night.png");
   transform: translateX(30px);
+}
+
+.language-slicer {
+  bottom: 100px;
+}
+.language-slicer span:before {
+  background-size: cover;
+  background-image: url("../images/pl-flag.png");
+  background-position: 50% 50%;
+}
+.language-slicer input:checked + span:before {
+  background-size: cover;
+  background-image: url("../images/eng_flag.png");
+  background-position: 50% 50%;
 }
 
 .hide {
@@ -205,6 +222,80 @@ section.main-page {
   top: 0;
   left: 0;
   background: url("../images/down-arrow.svg");
+}
+
+.clouds {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30rem;
+  height: 30rem;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cloud {
+  width: 70px;
+  height: 70px;
+  animation-name: wiggle;
+  animation-duration: 10s;
+  background-color: white;
+  display: block;
+  border-radius: 50%;
+  float: left;
+  position: absolute;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+  transform-origin: 50% 50%;
+  transition: all 0.3s ease-out;
+}
+.cloud-1 {
+  top: 50%;
+  right: 90%;
+  z-index: 6;
+}
+.cloud-2 {
+  top: 80%;
+  right: 65%;
+  z-index: 6;
+}
+.cloud-3 {
+  top: 70%;
+  right: 30%;
+  z-index: 1;
+}
+.cloud::before, .cloud::after {
+  animation-name: none;
+  transform: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: absolute;
+  background-color: white;
+  content: "";
+}
+.cloud::before {
+  left: 50%;
+  top: 0;
+  border-radius: 0;
+  width: 100px;
+}
+.cloud::after {
+  left: 150%;
+  box-shadow: -50px -25px 0px 10px white, -10px -25px 0px -5px white, inset -7px 0px 0px 3px #f5f4f4;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-30%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

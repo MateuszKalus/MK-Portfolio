@@ -42,11 +42,13 @@ section {
 .sky-container {
   z-index: 1;
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
 
-a { z-index: 1}
+a {
+  z-index: 1
+}
 
 p {
   margin: 30px 0px;
@@ -71,9 +73,10 @@ h1 {
 }
 
 section.main-page {
-  overflow: hidden;
   justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+
 }
 
 .moving-background {
@@ -142,18 +145,22 @@ $sun-size: 40vw;
   background-color: #315599;
   //color: rgba(5, 18, 36, 0.98);
 
+  & .clouds {
+    opacity: 1;
+  }
+
   & #moon-img {
     right: 50%;
     top: -$moon-size/2;
   }
 
   & .important-text {
-    background-color: rgb(109,185,213);
+    background-color: rgb(109, 185, 213);
     padding: 10px;
   }
 
   & .in-text-strong {
-    color: rgb(109,185,213);
+    color: rgb(109, 185, 213);
   }
 }
 
@@ -175,7 +182,7 @@ $sun-size: 40vw;
   //background: rgba(255, 255, 255, 0.05);
 }
 
-.theme-slicer {
+.theme-slicer, .language-slicer {
   z-index: 1;
   position: absolute;
   right: 50px;
@@ -185,7 +192,6 @@ $sun-size: 40vw;
 
   $this-width: 55px;
   $this-height: 25px;
-
 
 
   & span {
@@ -237,6 +243,28 @@ $sun-size: 40vw;
   }
 }
 
+.language-slicer {
+  bottom: 100px;
+
+  & span {
+
+    &:before {
+      background-size: cover;
+      background-image: url("../images/pl-flag.png");
+      background-position: 50% 50%;
+
+    }
+  }
+
+  & input:checked + span:before {
+    background-size: cover;
+    background-image: url("../images/eng_flag.png");
+    background-position: 50% 50%;
+  }
+
+
+}
+
 .hide {
   visibility: hidden;
 }
@@ -254,3 +282,88 @@ $sun-size: 40vw;
   left: 0;
   background: url("../images/down-arrow.svg");
 }
+
+.clouds {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30rem;
+  height: 30rem;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cloud {
+  width: 70px;
+  height: 70px;
+  animation-name: wiggle;
+  animation-duration: 10s;
+  background-color: white;
+  display: block;
+  border-radius: 50%;
+  float: left;
+  position: absolute;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+  transform-origin: 50% 50%;
+  transition: all 0.3s ease-out;
+
+  &-1 {
+    top: 50%;
+    right: 90%;
+    z-index: 6;
+  }
+
+  &-2 {
+    top: 80%;
+    right: 65%;
+    z-index: 6;
+  }
+
+  &-3 {
+    top: 70%;
+    right: 30%;
+    z-index: 1;
+  }
+
+  &::before, &::after {
+    animation-name: none;
+    transform: none;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: white;
+    content: "";
+  }
+
+  &::before {
+    left: 50%;
+    top: 0;
+    border-radius: 0;
+    width: 100px;
+  }
+
+  &::after {
+    left: 150%;
+    box-shadow: -50px -25px 0px 10px white, -10px -25px 0px -5px white, inset -7px 0px 0px 3px #f5f4f4;
+  }
+
+}
+
+@keyframes wiggle {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-30%);
+
+  }
+  100% {
+    transform: translateX(0);
+
+  }
+
+}
+

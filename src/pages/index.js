@@ -4,12 +4,19 @@ import {Link} from 'gatsby'
 import Moon from '../images/moon.png'
 import Sun from '../images/sun.png'
 
-import React, {useState, useEffect} from "react";
+import getLanguage from '../languages'
 
+import React, {useState, useEffect} from "react";
 
 const IndexPage = () => {
 
     const [isNight, setIsNight] = useState(true);
+    const [language, setLanguage] = useState('english');
+
+    let l = getLanguage(language);
+
+    console.log(l, language);
+
 
     const getGradient = (deg, opacity) => {
         if (isNight) return `linear-gradient(${deg}deg, rgba(0,0,0,0) 45%, rgba(0,69,97,${opacity}) 95%)`;
@@ -17,6 +24,8 @@ const IndexPage = () => {
     };
 
     useEffect(() => {
+
+        l = getLanguage(language);
 
         window.addEventListener('scroll', handleScroll);
 
@@ -99,40 +108,18 @@ const IndexPage = () => {
 
     const handleThemeChange = (e) => {
         setIsNight(e.target.checked);
+    }
 
+    const handleLanguageChange = (e) => {
+        if (e.target.checked) {
+            setLanguage('english');
+        } else setLanguage('polish');
     }
 
     return (
         <main>
             <div className={'moving-background'}></div>
             <section className={'main-page night'} id={'main-page'}>
-                <div className={'content'}>
-                    <h1 className={'opacity-marker'}>Hi.</h1>
-                    <span>My name is Mateusz.</span>
-                    <div className={'text-content'}>
-                        <p>
-                            I am <strong className={'in-text-strong'}>Front-End Developer</strong> and Electronics Engineer. I am also familiar with the <u className={'in-text-strong'}>Back-End</u> and <u className={'in-text-strong'}>Design</u> technologies that I use as a tool in my work.
-                        </p>
-                        <p className={'important-text'}>
-                            For me, programming is a well of endless possibilities, and each new line of code is a
-                            miracle of creation.
-                        </p>
-                        <p>
-                            However, at the end of the day, the most important thing is that the project meets the
-                            requirements. In my projects, I pay attention to optimization, reliability and stability.
-
-                        </p>
-                        <p>
-                            I believe that success in my profession lies in combining good quality code and adopting a
-                            strategy:
-                            from general to specific.
-                        </p>
-                        <p id={'last-sentence'}>
-                            And constant learning of course 😃
-                        </p>
-
-                    </div>
-                </div>
 
                 <div className={'sky-container'}>
                     <sky>
@@ -144,8 +131,46 @@ const IndexPage = () => {
                     </sky>
                 </div>
 
+
+                <div className={'content'}>
+                    <h1 className={'opacity-marker'}>{l.main_header_1}</h1>
+                    <span>{l.main_header_2}</span>
+                    <div className={'text-content'}>
+                        <p>
+                            {l.main_content_0}
+                        </p>
+                        <p className={'important-text'}>
+                            {l.main_content_1}
+                        </p>
+                        <p>
+                            {l.main_content_2}
+
+                        </p>
+                        <p>
+                            {l.main_content_3}
+                        </p>
+                        <p id={'last-sentence'}>
+                            {l.main_content_4}
+                        </p>
+
+                    </div>
+                </div>
+
+
+
                 <img id={'moon-img'} className={'orb'} src={Moon}/>
                 <img id={'sun-img'} className={'orb'} src={Sun}/>
+
+                <div className={'clouds'}>
+                    <div className={'cloud cloud-1'}></div>
+                    <div className={'cloud cloud-2'}></div>
+                    <div className={'cloud cloud-3'}></div>
+
+                </div>
+                <label className={'language-slicer'}>
+                    <input defaultChecked={true} type="checkbox" onChange={handleLanguageChange}/>
+                    <span></span>
+                </label>
 
                 <label className={'theme-slicer'}>
                     <input defaultChecked={true} type="checkbox" onChange={handleThemeChange}/>
