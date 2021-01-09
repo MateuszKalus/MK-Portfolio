@@ -3,10 +3,12 @@ import './sky.css'
 import {Link} from 'gatsby'
 import Moon from '../images/moon.png'
 import Sun from '../images/sun.png'
+import Mateo from '../images/MatLogo.svg'
 
 import getLanguage from '../languages'
 
-import React, {useState, useEffect} from "react";
+import React, {Component, useState, useEffect} from "react";
+import ProjectsSector from "../components/ProjectsSector";
 
 const IndexPage = () => {
 
@@ -14,8 +16,6 @@ const IndexPage = () => {
     const [language, setLanguage] = useState('english');
 
     let l = getLanguage(language);
-
-    console.log(l, language);
 
 
     const getGradient = (deg, opacity) => {
@@ -89,7 +89,7 @@ const IndexPage = () => {
 
             if (deg < 0) deg = 0;
 
-            document.querySelector('.sky-container').style.opacity = opacityForStars;
+            // document.querySelector('.sky-container').style.opacity = opacityForStars;
 
             // if (firstTime) {
             //     deg = initialAngle;
@@ -117,7 +117,7 @@ const IndexPage = () => {
     }
 
     return (
-        <main>
+        <main className={'proximity-scroll-snapping'}>
             <div className={'moving-background'}></div>
             <section className={'main-page night'} id={'main-page'}>
 
@@ -134,7 +134,11 @@ const IndexPage = () => {
 
                 <div className={'content'}>
                     <h1 className={'opacity-marker'}>{l.main_header_1}</h1>
-                    <span>{l.main_header_2}</span>
+                    <span className={'header-with-svg'}>{l.main_header_2}
+                        <div className={'svg-wrapper'}>
+                            <img id={'mat-svg'} src={Mateo}/>
+                        </div>
+                    </span>
                     <div className={'text-content'}>
                         <p>
                             {l.main_content_0}
@@ -155,7 +159,6 @@ const IndexPage = () => {
 
                     </div>
                 </div>
-
 
 
                 <img id={'moon-img'} className={'orb'} src={Moon}/>
@@ -182,9 +185,10 @@ const IndexPage = () => {
             </section>
 
 
-            <section className={'night'}>
+            <section className={'projects-section night'}>
 
-                <a href={'#main-page'}>Link</a>
+
+                <ProjectsSector/>
 
             </section>
         </main>

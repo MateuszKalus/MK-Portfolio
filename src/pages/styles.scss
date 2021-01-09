@@ -17,6 +17,14 @@ html, body {
 
 main {
   position: relative;
+
+  &.proximity-scroll-snapping {
+    overflow: scroll;
+
+    scroll-snap-type: y mandatory;
+    //scroll-snap-points-y:
+
+  }
 }
 
 .pagelink {
@@ -37,6 +45,8 @@ section {
   width: 100%;
   height: 100vh;
   display: flex;
+
+  overflow: hidden;
 }
 
 .sky-container {
@@ -58,7 +68,7 @@ p {
 h1 {
   font-family: Lato, sans-serif;
   font-size: 80px;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-bottom: 0px;
 
   & + span {
@@ -75,7 +85,6 @@ h1 {
 section.main-page {
   justify-content: flex-start;
   align-items: center;
-  overflow: hidden;
 
 }
 
@@ -365,5 +374,36 @@ $sun-size: 40vw;
 
   }
 
+}
+.header-with-svg {
+  position: relative;
+
+  & .svg-wrapper {
+    z-index: 10;
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    position: absolute;
+    right: -220px;
+    bottom: -45px;
+
+    overflow: hidden;
+    //object-fit: fill;
+
+    //background-color: rgb(28, 27, 70);
+  }
+
+  & #mat-svg {
+    //border: 1px solid white;
+
+
+    display: block;
+    height: 100%;
+    width: 100%;
+
+
+  }
 }
 
